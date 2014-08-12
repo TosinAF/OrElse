@@ -8,6 +8,8 @@
 
 #import <MMPickerView.h>
 #import "OENewTaskViewController.h"
+#import "OEHomeViewController.h"
+#import <Parse/Parse.h>
 
 @interface OENewTaskViewController () <UITextFieldDelegate>
 
@@ -106,9 +108,64 @@
 
     [MMPickerView onDoneButtonPressed:^{
         NSLog(@"Push New View");
+        [self sendMessageButtonHandler];
+        
     }];
 
     return NO;
+}
+
+- (IBAction)sendMessageButtonHandler  {
+    // The permissions requested from the user
+    PFUser *currentUser = [PFUser currentUser];
+    PFObject *task = [PFObject objectWithClassName:@"Task"];
+    task[@"task"] = self.taskTextField.text;
+    task[@"date"] = self.deadlineLabel.text;
+    task[@"creatorID"] = currentUser.username;
+    
+    
+    [FBWebDialogs
+     presentRequestsDialogModallyWithSession:[FBSession activeSession]
+     message:@"Frape Me"
+     title:@"OrElse"
+     parameters:nil
+     handler:^(FBWebDialogResult result, NSURL *resultURL, NSError *error) {
+         if (error) {
+             // Error launching the dialog or sending the request.
+             NSLog(@"Error sending request.");
+         } else {
+             if (result == FBWebDialogResultDialogNotCompleted) {
+                 // User clicked the "x" icon
+                 NSLog(@"User canceled request.");
+             } else {
+                 // Handle the send request callback
+                 NSDictionary *urlParams = [self parseURLParams:[resultURL query]];
+                 if (![urlParams valueForKey:@"request"]) {
+                     // User clicked the Cancel button
+                     NSLog(@"User canceled request.");
+                 } else {
+                     // User clicked the Send button
+                     NSString *requestID = [urlParams valueForKey:@"request"];
+                     NSLog(@"Request ID: %@", requestID);
+                     task[@"supervisorID"] = urlParams[@"to%5B0%5D"];
+                     [task saveInBackground];
+                     [self.navigationController pushViewController:[OEHomeViewController new] animated:TRUE];
+                 }
+             }
+         }
+     }];
+}
+
+- (NSDictionary*)parseURLParams:(NSString *)query {
+    NSArray *pairs = [query componentsSeparatedByString:@"&"];
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    for (NSString *pair in pairs) {
+        NSArray *kv = [pair componentsSeparatedByString:@"="];
+        NSString *val =
+        [kv[1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        params[kv[0]] = val;
+    }
+    return params;
 }
 
 @end

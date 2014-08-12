@@ -10,11 +10,15 @@
 #import "OEHeaderView.h"
 #import "OESubmitView.h"
 #import "OEHomeViewController.h"
+#import <Parse/Parse.h>
+#import <FacebookSDK/FacebookSDK.h>
 
 @interface OEHomeViewController () <UIScrollViewDelegate>
 
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIPageControl *pageControl;
+@property (nonatomic, strong) NSArray *myTasks;
+@property (nonatomic, strong) NSArray *friendsTasks;
 
 @end
 
@@ -60,6 +64,9 @@
 
     OESubmitView *submitView = [[OESubmitView alloc] initWithFrame:CGRectMake(160, 470, 150, 90)];
     [self.view addSubview:submitView];
+    
+    [self fetchMyTasks];
+    [self fetchFriendsTasks];
 }
 
 #pragma mark - UIScrollView Delegate Methods
@@ -70,6 +77,38 @@
     float fractionalPage = self.scrollView.contentOffset.x / pageWidth;
     NSInteger page = lround(fractionalPage);
     self.pageControl.currentPage = page;
+}
+
+- (void)fetchMyTasks {
+    [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection,
+                                                           NSDictionary<FBGraphUser> *me,
+                                                           NSError *error) {
+        if(error) {
+            NSLog(error);
+            return;
+        }
+        PFQuery *query = [PFQuery queryWithClassName:@"Task"];
+        [query whereKey:@"creatorID" equalTo:[PFUser currentUser].username];
+        self.myTasks = [query findObjects];
+        NSLog(@"My Task are %@", self.myTasks);
+        
+    }];
+}
+
+- (void)fetchFriendsTasks {
+    [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection,
+                                                           NSDictionary<FBGraphUser> *me,
+                                                           NSError *error) {
+        if(error) {
+            
+            return;
+        }
+        PFQuery *query = [PFQuery queryWithClassName:@"Task"];
+        [query whereKey:@"supervisorID" equalTo:me.objectID];
+        self.friendsTasks = [query findObjects];
+        NSLog(@"My Friends Task are %@", self.friendsTasks);
+        
+    }];
 }
 
 @end
