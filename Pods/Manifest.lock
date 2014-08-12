@@ -1,0 +1,16 @@
+PODS:
+  - iOS-blur (0.0.5)
+  - MMPickerView (0.0.1)
+  - pop (1.0.6)
+
+DEPENDENCIES:
+  - iOS-blur
+  - MMPickerView (~> 0.0.1)
+  - pop
+
+SPEC CHECKSUMS:
+  iOS-blur: 5ec57b4a72e57a4f8f5f47ff3f59e56c0690b761
+  MMPickerView: e00f2969cb857297adb165b421b2a3284470e686
+  pop: e518794da38942c05255eb64b36d894e70cb4f00
+
+COCOAPODS: 0.33.1
