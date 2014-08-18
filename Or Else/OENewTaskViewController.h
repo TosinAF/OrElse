@@ -10,5 +10,4 @@
 
 @interface OENewTaskViewController : UIViewController
 
-
 @end

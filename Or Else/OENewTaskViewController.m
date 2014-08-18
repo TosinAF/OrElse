@@ -21,8 +21,7 @@
 
 @implementation OENewTaskViewController
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [self.taskTextField becomeFirstResponder];
     [[self navigationController] setNavigationBarHidden:YES animated:YES];
 }
@@ -70,7 +69,7 @@
     [byLabel setFont:[UIFont fontWithName:@"Campton" size:24.0]];
 
     UILabel *deadlineLabel = [[UILabel alloc] initWithFrame:CGRectMake(55, 230, 220, 30)];
-    [deadlineLabel setText:@"tonight"];
+    [deadlineLabel setText:[self.deadlineOptions firstObject]];
     [deadlineLabel setTextColor:whiteColor];
     [deadlineLabel setFont:[UIFont fontWithName:@"Campton-Bold" size:24.0]];
 
@@ -88,8 +87,7 @@
 
 #pragma mark - UITextFieldDelegate
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [self.taskTextField resignFirstResponder];
 
     NSDictionary *options = @{MMtextColor: [UIColor whiteColor],
@@ -116,13 +114,11 @@
 }
 
 - (IBAction)sendMessageButtonHandler  {
-    // The permissions requested from the user
     PFUser *currentUser = [PFUser currentUser];
     PFObject *task = [PFObject objectWithClassName:@"Task"];
     task[@"task"] = self.taskTextField.text;
     task[@"date"] = self.deadlineLabel.text;
     task[@"creatorID"] = currentUser.username;
-    
     
     [FBWebDialogs
      presentRequestsDialogModallyWithSession:[FBSession activeSession]

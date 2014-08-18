@@ -11,6 +11,7 @@
 #import "OELaunchViewController.h"
 #import "OENewTaskViewController.h"
 #import "JCRBlurView.h"
+#import "FacebookHelper.h"
 
 BOOL firstClick;
 
@@ -36,7 +37,6 @@ BOOL firstClick;
 {
     [super viewWillAppear:animated];
     [[self navigationController] setNavigationBarHidden:YES animated:YES];
-
 }
 
 - (void)viewDidLoad {
@@ -44,7 +44,7 @@ BOOL firstClick;
     [super viewDidLoad];
     [self setTitle:@"hello"];
     [self.view setBackgroundColor:[UIColor whiteColor]];
-    firstClick = true;
+    firstClick = false;
 
     [self addBackground];
     [self addIntroText];
@@ -93,29 +93,9 @@ BOOL firstClick;
         firstClick = false;
 
     } else {
-
-        NSArray *permissionsArray = @[ @"user_about_me", @"user_friends", @"read_friendlists"];
-
-        [PFFacebookUtils initializeFacebook];
-        [PFFacebookUtils logInWithPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
-
-            if (!user) {
-
-                if (!error) {
-
-                    NSLog(@"Uh oh. The user cancelled the Facebook login.");
-
-                } else {
-
-                    NSLog(@"Uh oh. An error occurred: %@", error);
-                }
-                
-            } else {
-
-                [self.navigationController pushViewController:[OENewTaskViewController new] animated:YES];
-            }
-
-        }];
+        
+        [FacebookHelper authenticateWithFacebook];
+        [self.navigationController pushViewController:[OENewTaskViewController new] animated:YES];
     }
 }
 
@@ -140,16 +120,19 @@ BOOL firstClick;
 {
     NSString *introString = @"Having the motivation to get stuff done has never been easier!";
 
-    NSMutableAttributedString *mutableAttrString = [[NSMutableAttributedString alloc] initWithString:@"Having the motivation to get stuff done has never been easier!"];
+    NSMutableAttributedString *mutableAttrString = [[NSMutableAttributedString alloc] initWithString:introString];
 
     NSString *boldText = @"motivation";
     NSRange boldTextRange = [introString rangeOfString:boldText];
+    
+    [mutableAttrString addAttributes:@{
+                                       NSFontAttributeName : [UIFont fontWithName:@"Campton-Light" size:30.0],
+                                       NSForegroundColorAttributeName : [UIColor whiteColor]
+                                       }
+                               range:NSMakeRange(0, [introString length])];
 
-    [mutableAttrString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Campton-Light" size:30.0] range:NSMakeRange(0, [introString length])];
-
-    [mutableAttrString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, [introString length])];
-
-    [mutableAttrString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Campton-Bold" size:35.0] range:boldTextRange];
+    [mutableAttrString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Campton-Bold" size:35.0]
+                              range:boldTextRange];
 
     UILabel *text = [[UILabel alloc] initWithFrame:CGRectMake(20, 100, 250, 300)];
     [text setAttributedText:mutableAttrString];

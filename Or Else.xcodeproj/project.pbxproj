@@ -41,9 +41,10 @@
 		4ED033A9198D9A5D003D25A3 /* pointOne.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ED033A6198D9A5D003D25A3 /* pointOne.png */; };
 		4ED033AA198D9A5D003D25A3 /* pointThree.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ED033A7198D9A5D003D25A3 /* pointThree.png */; };
 		4ED033AB198D9A5D003D25A3 /* pointTwo.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ED033A8198D9A5D003D25A3 /* pointTwo.png */; };
+		B907200A19A0DC5200756B32 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B907200919A0DC5200756B32 /* Parse.framework */; };
+		B907200C19A0DC7600756B32 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B907200B19A0DC7600756B32 /* FacebookSDK.framework */; };
+		B907200F19A0E49400756B32 /* FacebookHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B907200E19A0E49400756B32 /* FacebookHelper.m */; };
 		B9BAB03A199AC52C00285729 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B9BAB039199AC52C00285729 /* libPods.a */; };
-		B9BAB03D199AC5F600285729 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9BAB03B199AC5F600285729 /* FacebookSDK.framework */; };
-		B9BAB03E199AC5F600285729 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9BAB03C199AC5F600285729 /* Parse.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,10 +105,11 @@
 		4ED033A6198D9A5D003D25A3 /* pointOne.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pointOne.png; sourceTree = "<group>"; };
 		4ED033A7198D9A5D003D25A3 /* pointThree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pointThree.png; sourceTree = "<group>"; };
 		4ED033A8198D9A5D003D25A3 /* pointTwo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pointTwo.png; sourceTree = "<group>"; };
+		B907200919A0DC5200756B32 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		B907200B19A0DC7600756B32 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		B907200D19A0E49400756B32 /* FacebookHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FacebookHelper.h; path = Utilities/FacebookHelper.h; sourceTree = "<group>"; };
+		B907200E19A0E49400756B32 /* FacebookHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FacebookHelper.m; path = Utilities/FacebookHelper.m; sourceTree = "<group>"; };
 		B9BAB039199AC52C00285729 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
-		B9BAB03B199AC5F600285729 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = "Or Else/FacebookSDK.framework"; sourceTree = "<group>"; };
-		B9BAB03C199AC5F600285729 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "Or Else/Parse.framework"; sourceTree = "<group>"; };
-		D3A1C293780A4098863AB0EC /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,10 +122,10 @@
 				4EA355121997F07C005D58F0 /* SystemConfiguration.framework in Frameworks */,
 				4EA355101997F06A005D58F0 /* Security.framework in Frameworks */,
 				4EA3550E1997F056005D58F0 /* QuartzCore.framework in Frameworks */,
-				B9BAB03D199AC5F600285729 /* FacebookSDK.framework in Frameworks */,
-				B9BAB03E199AC5F600285729 /* Parse.framework in Frameworks */,
+				B907200A19A0DC5200756B32 /* Parse.framework in Frameworks */,
 				4EA3550C1997F04E005D58F0 /* MobileCoreServices.framework in Frameworks */,
 				4EA3550A1997F042005D58F0 /* libz.dylib in Frameworks */,
+				B907200C19A0DC7600756B32 /* FacebookSDK.framework in Frameworks */,
 				4EA355081997F034005D58F0 /* CoreLocation.framework in Frameworks */,
 				4EA355061997F02A005D58F0 /* CoreGraphics.framework in Frameworks */,
 				4EA355041997F020005D58F0 /* CFNetwork.framework in Frameworks */,
@@ -144,8 +146,8 @@
 		2F766E57282046E08578FBF0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B9BAB03B199AC5F600285729 /* FacebookSDK.framework */,
-				B9BAB03C199AC5F600285729 /* Parse.framework */,
+				B907200B19A0DC7600756B32 /* FacebookSDK.framework */,
+				B907200919A0DC5200756B32 /* Parse.framework */,
 				B9BAB039199AC52C00285729 /* libPods.a */,
 				4EA355191997F2E7005D58F0 /* Social.framework */,
 				4EA355111997F07C005D58F0 /* SystemConfiguration.framework */,
@@ -157,7 +159,6 @@
 				4EA355051997F02A005D58F0 /* CoreGraphics.framework */,
 				4EA355031997F020005D58F0 /* CFNetwork.framework */,
 				4EA355011997F017005D58F0 /* AudioToolbox.framework */,
-				D3A1C293780A4098863AB0EC /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -206,6 +207,7 @@
 				4E1BD68F198C76B000CDBBE1 /* OEHomeViewController.m */,
 				4E136F31198E49DE0014A93A /* OENewTaskViewController.h */,
 				4E136F32198E49DE0014A93A /* OENewTaskViewController.m */,
+				B907201019A0E49C00756B32 /* Utilities */,
 				4ED03392198CF605003D25A3 /* Categories */,
 				4E1BD691198C8FD600CDBBE1 /* Views */,
 				4ED03389198CF37F003D25A3 /* Fonts */,
@@ -268,6 +270,15 @@
 				4E7B8AED198CF6970032AB04 /* UIImage+OverlayColor.m */,
 			);
 			name = Categories;
+			sourceTree = "<group>";
+		};
+		B907201019A0E49C00756B32 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				B907200D19A0E49400756B32 /* FacebookHelper.h */,
+				B907200E19A0E49400756B32 /* FacebookHelper.m */,
+			);
+			name = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -421,6 +432,7 @@
 				4E136F33198E49DE0014A93A /* OENewTaskViewController.m in Sources */,
 				4E1BD690198C76B000CDBBE1 /* OEHomeViewController.m in Sources */,
 				4E7B8AEE198CF6970032AB04 /* UIImage+OverlayColor.m in Sources */,
+				B907200F19A0E49400756B32 /* FacebookHelper.m in Sources */,
 				4E136F36198E95B10014A93A /* OECardView.m in Sources */,
 				4E40500119959C0200FB7086 /* OESubmitView.m in Sources */,
 				4E1D5867198C65610089EDD1 /* OEAppDelegate.m in Sources */,
