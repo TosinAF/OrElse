@@ -17,6 +17,8 @@
 		4E1D5867198C65610089EDD1 /* OEAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E1D5866198C65610089EDD1 /* OEAppDelegate.m */; };
 		4E1D586F198C65610089EDD1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E1D586E198C65610089EDD1 /* Images.xcassets */; };
 		4E1D587B198C65610089EDD1 /* Or_ElseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E1D587A198C65610089EDD1 /* Or_ElseTests.m */; };
+		4E32BB2419A3A4D00018452C /* OENotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E32BB2319A3A4D00018452C /* OENotificationViewController.m */; };
+		4E32BB2719A3B0D40018452C /* OEPlaceholderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E32BB2619A3B0D40018452C /* OEPlaceholderView.m */; };
 		4E404FFC19958D9900FB7086 /* CompleteButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E404FF919958D9900FB7086 /* CompleteButton.png */; };
 		4E404FFD19958D9900FB7086 /* FailButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E404FFA19958D9900FB7086 /* FailButton.png */; };
 		4E404FFE19958D9900FB7086 /* HanSolo.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E404FFB19958D9900FB7086 /* HanSolo.png */; };
@@ -41,9 +43,9 @@
 		4ED033A9198D9A5D003D25A3 /* pointOne.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ED033A6198D9A5D003D25A3 /* pointOne.png */; };
 		4ED033AA198D9A5D003D25A3 /* pointThree.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ED033A7198D9A5D003D25A3 /* pointThree.png */; };
 		4ED033AB198D9A5D003D25A3 /* pointTwo.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ED033A8198D9A5D003D25A3 /* pointTwo.png */; };
+		4EE7C83D19A3B83A00EC945B /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9BAB03C199AC5F600285729 /* Parse.framework */; };
 		B9BAB03A199AC52C00285729 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B9BAB039199AC52C00285729 /* libPods.a */; };
 		B9BAB03D199AC5F600285729 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9BAB03B199AC5F600285729 /* FacebookSDK.framework */; };
-		B9BAB03E199AC5F600285729 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9BAB03C199AC5F600285729 /* Parse.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +80,10 @@
 		4E1D5874198C65610089EDD1 /* Or ElseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Or ElseTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E1D5879198C65610089EDD1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4E1D587A198C65610089EDD1 /* Or_ElseTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Or_ElseTests.m; sourceTree = "<group>"; };
+		4E32BB2219A3A4D00018452C /* OENotificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OENotificationViewController.h; sourceTree = "<group>"; };
+		4E32BB2319A3A4D00018452C /* OENotificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OENotificationViewController.m; sourceTree = "<group>"; };
+		4E32BB2519A3B0D40018452C /* OEPlaceholderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OEPlaceholderView.h; sourceTree = "<group>"; };
+		4E32BB2619A3B0D40018452C /* OEPlaceholderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OEPlaceholderView.m; sourceTree = "<group>"; };
 		4E404FF919958D9900FB7086 /* CompleteButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CompleteButton.png; sourceTree = "<group>"; };
 		4E404FFA19958D9900FB7086 /* FailButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FailButton.png; sourceTree = "<group>"; };
 		4E404FFB19958D9900FB7086 /* HanSolo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HanSolo.png; sourceTree = "<group>"; };
@@ -121,8 +127,8 @@
 				4EA355101997F06A005D58F0 /* Security.framework in Frameworks */,
 				4EA3550E1997F056005D58F0 /* QuartzCore.framework in Frameworks */,
 				B9BAB03D199AC5F600285729 /* FacebookSDK.framework in Frameworks */,
-				B9BAB03E199AC5F600285729 /* Parse.framework in Frameworks */,
 				4EA3550C1997F04E005D58F0 /* MobileCoreServices.framework in Frameworks */,
+				4EE7C83D19A3B83A00EC945B /* Parse.framework in Frameworks */,
 				4EA3550A1997F042005D58F0 /* libz.dylib in Frameworks */,
 				4EA355081997F034005D58F0 /* CoreLocation.framework in Frameworks */,
 				4EA355061997F02A005D58F0 /* CoreGraphics.framework in Frameworks */,
@@ -167,6 +173,8 @@
 			children = (
 				4E136F34198E95B10014A93A /* OECardView.h */,
 				4E136F35198E95B10014A93A /* OECardView.m */,
+				4E32BB2519A3B0D40018452C /* OEPlaceholderView.h */,
+				4E32BB2619A3B0D40018452C /* OEPlaceholderView.m */,
 				4E404FFF19959C0200FB7086 /* OESubmitView.h */,
 				4E40500019959C0200FB7086 /* OESubmitView.m */,
 				4E136F37198E966D0014A93A /* OEHeaderView.h */,
@@ -206,6 +214,8 @@
 				4E1BD68F198C76B000CDBBE1 /* OEHomeViewController.m */,
 				4E136F31198E49DE0014A93A /* OENewTaskViewController.h */,
 				4E136F32198E49DE0014A93A /* OENewTaskViewController.m */,
+				4E32BB2219A3A4D00018452C /* OENotificationViewController.h */,
+				4E32BB2319A3A4D00018452C /* OENotificationViewController.m */,
 				4ED03392198CF605003D25A3 /* Categories */,
 				4E1BD691198C8FD600CDBBE1 /* Views */,
 				4ED03389198CF37F003D25A3 /* Fonts */,
@@ -417,6 +427,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E1BD68D198C74E800CDBBE1 /* OELaunchViewController.m in Sources */,
+				4E32BB2419A3A4D00018452C /* OENotificationViewController.m in Sources */,
 				4E136F39198E966D0014A93A /* OEHeaderView.m in Sources */,
 				4E136F33198E49DE0014A93A /* OENewTaskViewController.m in Sources */,
 				4E1BD690198C76B000CDBBE1 /* OEHomeViewController.m in Sources */,
@@ -425,6 +436,7 @@
 				4E40500119959C0200FB7086 /* OESubmitView.m in Sources */,
 				4E1D5867198C65610089EDD1 /* OEAppDelegate.m in Sources */,
 				4E1D5864198C65610089EDD1 /* main.m in Sources */,
+				4E32BB2719A3B0D40018452C /* OEPlaceholderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -534,6 +546,12 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Or",
 					Else,
+					"$(PROJECT_DIR)/Or",
+					Else,
+					"$(PROJECT_DIR)/Or",
+					Else,
+					"$(PROJECT_DIR)/Or",
+					Else,
 				);
 				INFOPLIST_FILE = "Or Else/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -551,6 +569,12 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Or",
+					Else,
+					"$(PROJECT_DIR)/Or",
+					Else,
+					"$(PROJECT_DIR)/Or",
+					Else,
 					"$(PROJECT_DIR)/Or",
 					Else,
 				);

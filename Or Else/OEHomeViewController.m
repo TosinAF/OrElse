@@ -12,10 +12,12 @@
 #import "OEHomeViewController.h"
 #import <Parse/Parse.h>
 #import <FacebookSDK/FacebookSDK.h>
+#import "OEPlaceholderView.h"
 
 @interface OEHomeViewController () <UIScrollViewDelegate>
 
 @property (nonatomic, strong) UIScrollView *scrollView;
+@property (nonatomic, strong) OEPlaceholderView *placeholder;
 @property (nonatomic, strong) UIPageControl *pageControl;
 @property (nonatomic, strong) NSArray *myTasks;
 @property (nonatomic, strong) NSArray *friendsTasks;
@@ -26,7 +28,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [[self navigationController] setNavigationBarHidden:NO animated:YES];
+    [[self navigationController] setNavigationBarHidden:YES animated:YES];
 
 }
 
@@ -40,33 +42,46 @@
     OEHeaderView *headerView = [[OEHeaderView alloc] initWithFrame:CGRectMake(0, 10, 320, 100)];
     [self.view addSubview:headerView];
 
+    self.placeholder = [[OEPlaceholderView alloc] initWithFrame:CGRectMake(0, 130, 320, 300)];
+    [self.view addSubview:self.placeholder];
+    
+    [self fetchMyTasks];
+    [self fetchFriendsTasks];
+}
+
+- (void)loadUserTasks
+{
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 130, 320, 300)];
     [scrollView setDelegate:self];
     [scrollView setPagingEnabled:YES];
     [scrollView setShowsHorizontalScrollIndicator:NO];
-    [scrollView setContentSize:CGSizeMake(3 * 320, 300)];
+    [scrollView setContentSize:CGSizeMake([self.myTasks count] * 320, 300)];
 
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < [self.myTasks count]; i++) {
 
         OECardView *cardView = [[OECardView alloc] initWithFrame:CGRectMake(i * 320, 0, 320, 300)];
+
+        PFObject *task = self.myTasks[i];
+
+        [cardView.secondLabel setText:task[@"task"]];
+        [cardView.thirdLabel setText:task[@"date"]];
+        NSLog(@"%@", task[@"creatorID"] );
+        
         [scrollView addSubview:cardView];
     }
 
+    [self.placeholder removeFromSuperview];
     [self.view addSubview:scrollView];
     self.scrollView = scrollView;
 
-
     self.pageControl = [[UIPageControl alloc] init];
     self.pageControl.frame = CGRectMake(155, 450,10,10);
-    self.pageControl.numberOfPages = 3;
+    self.pageControl.numberOfPages = [self.myTasks count];
     self.pageControl.currentPage = 0;
     [self.view addSubview:self.pageControl];
 
     OESubmitView *submitView = [[OESubmitView alloc] initWithFrame:CGRectMake(160, 470, 150, 90)];
     [self.view addSubview:submitView];
-    
-    [self fetchMyTasks];
-    [self fetchFriendsTasks];
 }
 
 #pragma mark - UIScrollView Delegate Methods
@@ -80,6 +95,8 @@
 }
 
 - (void)fetchMyTasks {
+
+    // turn into backgroud tasks
     [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection,
                                                            NSDictionary<FBGraphUser> *me,
                                                            NSError *error) {
@@ -87,27 +104,41 @@
             NSLog(error);
             return;
         }
+
         PFQuery *query = [PFQuery queryWithClassName:@"Task"];
         [query whereKey:@"creatorID" equalTo:[PFUser currentUser].username];
-        self.myTasks = [query findObjects];
-        NSLog(@"My Task are %@", self.myTasks);
-        
+
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if (!error) {
+
+                self.myTasks = objects;
+                [self loadUserTasks];
+
+            } else {
+                // Log details of the failure
+                NSLog(@"Error: %@ %@", error, [error userInfo]);
+            }
+        }];
     }];
 }
 
 - (void)fetchFriendsTasks {
-    [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection,
-                                                           NSDictionary<FBGraphUser> *me,
-                                                           NSError *error) {
-        if(error) {
-            
-            return;
-        }
+    [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *me, NSError *error) {
+
+        if(error) return;
+
         PFQuery *query = [PFQuery queryWithClassName:@"Task"];
         [query whereKey:@"supervisorID" equalTo:me.objectID];
-        self.friendsTasks = [query findObjects];
-        NSLog(@"My Friends Task are %@", self.friendsTasks);
-        
+
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if (!error) {
+
+                self.friendsTasks = objects;
+
+            } else {
+                NSLog(@"Error: %@ %@", error, [error userInfo]);
+            }
+        }];
     }];
 }
 

@@ -98,6 +98,10 @@ BOOL isShowingFrontView;
     [fourthLabel setAttributedText:mutableAttrString];
     [fourthLabel setNumberOfLines:2];
 
+    self.secondLabel = secondLabel;
+    self.thirdLabel = thirdLabel;
+    //self.fourthLabel = fourthLabel;
+
     [self.frontView addSubview:firstLabel];
     [self.frontView addSubview:secondLabel];
     [self.frontView addSubview:thirdLabel];

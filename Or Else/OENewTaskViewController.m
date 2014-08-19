@@ -62,6 +62,9 @@
     [taskTextField setSpellCheckingType:UITextSpellCheckingTypeNo];
     [taskTextField setAutocapitalizationType:UITextAutocapitalizationTypeNone];
 
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(textFieldTapped)];
+    [taskTextField addGestureRecognizer:tap];
+
     taskTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"do some laundry" attributes:@{NSForegroundColorAttributeName:[UIColor lightGrayColor]}];
 
     UILabel *byLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 230, 30, 30)];
@@ -113,6 +116,11 @@
     }];
 
     return NO;
+}
+
+- (void)textFieldTapped
+{
+     [self.taskTextField becomeFirstResponder];
 }
 
 - (IBAction)sendMessageButtonHandler  {
