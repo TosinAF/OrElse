@@ -26,14 +26,11 @@
 
 @implementation OEHomeViewController
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [[self navigationController] setNavigationBarHidden:YES animated:YES];
-
 }
 
 - (void)viewDidLoad {
-
     [super viewDidLoad];
 
     UIColor *backgroundColor = [UIColor colorWithRed:0.404 green:0.000 blue:0.000 alpha:1];
@@ -58,7 +55,6 @@
     [scrollView setContentSize:CGSizeMake([self.myTasks count] * 320, 300)];
 
     for (int i = 0; i < [self.myTasks count]; i++) {
-
         OECardView *cardView = [[OECardView alloc] initWithFrame:CGRectMake(i * 320, 0, 320, 300)];
 
         PFObject *task = self.myTasks[i];
@@ -95,46 +91,30 @@
 }
 
 - (void)fetchMyTasks {
-
-    // turn into backgroud tasks
-    [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection,
-                                                           NSDictionary<FBGraphUser> *me,
-                                                           NSError *error) {
-        if(error) {
-            NSLog(error);
-            return;
-        }
-
         PFQuery *query = [PFQuery queryWithClassName:@"Task"];
         [query whereKey:@"creatorID" equalTo:[PFUser currentUser].username];
 
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             if (!error) {
-
                 self.myTasks = objects;
                 [self loadUserTasks];
-
             } else {
                 // Log details of the failure
                 NSLog(@"Error: %@ %@", error, [error userInfo]);
             }
         }];
-    }];
 }
 
 - (void)fetchFriendsTasks {
     [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *me, NSError *error) {
 
         if(error) return;
-
         PFQuery *query = [PFQuery queryWithClassName:@"Task"];
         [query whereKey:@"supervisorID" equalTo:me.objectID];
 
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             if (!error) {
-
                 self.friendsTasks = objects;
-
             } else {
                 NSLog(@"Error: %@ %@", error, [error userInfo]);
             }
