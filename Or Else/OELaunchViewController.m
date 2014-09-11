@@ -93,8 +93,13 @@ BOOL firstClick;
         firstClick = false;
 
     } else {
-        [FacebookHelper authenticateWithFacebook];
-        [self.navigationController pushViewController:[OENewTaskViewController new] animated:YES];
+        if ([PFUser currentUser] && // Check if user is cached
+            [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) { // Check if user is linked to Facebook
+            // Present the next view controller without animation
+            [self.navigationController pushViewController:[OENewTaskViewController new] animated:YES];
+        } else {
+            [FacebookHelper authenticateWithFacebook];
+        }
     }
 }
 
