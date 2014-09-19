@@ -12,7 +12,7 @@
 @implementation FacebookHelper
 
 + (void)authenticateWithFacebook {
-    NSArray *permissionsArray = @[ @"user_about_me", @"user_friends", @"read_friendlists"];
+    NSArray *permissionsArray = @[ @"user_about_me", @"user_friends", @"read_friendlists", @"publish_actions"];
     
     [PFFacebookUtils initializeFacebook];
     [PFFacebookUtils logInWithPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
@@ -25,5 +25,20 @@
         }
     }];
 }
+
++ (void)createFacebookPostWithText:(NSString *)text {
+    [FBRequestConnection startForPostStatusUpdate:text
+                                completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+                                    if (!error) {
+                                        // Status update posted successfully to Facebook
+                                        NSLog(@"result: %@", result);
+                                    } else {
+                                        // An error occurred, we need to handle the error
+                                        // See: https://developers.facebook.com/docs/ios/errors
+                                        NSLog(@"%@", error.description);
+                                    }
+                                }];
+}
+
 
 @end

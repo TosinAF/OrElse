@@ -111,7 +111,7 @@
         if(error) return;
         PFQuery *query = [PFQuery queryWithClassName:@"Task"];
         [query whereKey:@"supervisorID" equalTo:me.objectID];
-
+        
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             if (!error) {
                 self.friendsTasks = objects;

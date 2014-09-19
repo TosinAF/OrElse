@@ -11,5 +11,6 @@
 @interface FacebookHelper : NSObject
 
 +(void)authenticateWithFacebook;
++(void)createFacebookPostWithText:(NSString *)text;
 
 @end
